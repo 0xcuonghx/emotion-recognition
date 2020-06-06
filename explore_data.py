@@ -1,22 +1,25 @@
 import pandas as pd
 import numpy as np
-import matplotlib
 import matplotlib.pyplot as plt
 
+#1.read data
 fer2013_path = 'data/fer2013.csv'
-raw_data = pd.read_csv(fer2013_path)
+data = pd.read_csv(fer2013_path)
+data['pixels'] = data['pixels'].apply(lambda x: np.array([int(pixel) for pixel in x.split(' ')]))
 
-# raw_data.info()
-# raw_data.head()
-# raw_data["Usage"].value_counts()
+#2.split data into sets
+train_set   = data.loc[data['Usage'] == 'Training',['emotion','pixels']]
+public_set  = data.loc[data['Usage'] == 'PublicTest',['emotion','pixels']]
+private_set = data.loc[data['Usage'] == 'PrivateTest',['emotion','pixels']]
 
-# See pricture
-img = raw_data["pixels"][0]
-value = img.split(" ")
-x_pixels = np.array(value, 'float32')
-x_pixels /= 255
-x_reshaped = x_pixels.reshape(48, 48)
+print(f"train_set :{train_set.shape[0]}")
+print(f"public_set :{public_set.shape[0]}")
+print(f"private_set:{private_set.shape[0]}")
 
-plt.imshow(x_reshaped, cmap= "gray", interpolation="nearest")    
-plt.axis("off")
+# get sample image
+image = train_set.loc[1, 'pixels']
+label  = train_set.loc[1, 'emotion']
+image = image.reshape(48,48)
+
+plt.imshow(image, cmap= "gray", interpolation="nearest")    
 plt.show()
