@@ -1,12 +1,7 @@
 
-import pandas as pd
 import numpy as np
 import random
-import warnings
 from keras.utils.np_utils import to_categorical
-from keras.models import Sequential
-from keras.layers import Dense, Conv2D, Flatten,MaxPooling2D
-import matplotlib.pyplot as plt
 
 #3.make batch generator
 #  using generator to save the memory
@@ -36,3 +31,15 @@ def train_test_split(df,split):
     train_df = df.loc[train_index].copy(deep=True).reset_index(drop=True)
     test_df  = df.loc[test_index].copy(deep=True).reset_index(drop=True)
     return train_df,test_df
+    
+def preprocess_input(x, v2=True):
+    x = x.astype('float32')
+    x = x / 255.0
+    if v2:
+        x = x - 0.5
+        x = x * 2.0
+    return x
+
+def get_labels():
+    return {0:'Angry',1:'Disgust',2:'Fear',3:'Happy',
+                4:'Sad',5:'Surprise',6:'Neutral'}

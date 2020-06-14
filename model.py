@@ -1,13 +1,9 @@
-import pandas as pd
 import numpy as np
-import random
-import warnings
-from keras.utils.np_utils import to_categorical
 from keras.models import Sequential
 from keras.layers import Dense, Conv2D, Flatten,MaxPooling2D
 import matplotlib.pyplot as plt
 
-def Emotion_classification_CNN(input_shape, num_classes):
+def Emotion_classification_CNN():
     #4.build model by keras
     model = Sequential()
     #add model layers
