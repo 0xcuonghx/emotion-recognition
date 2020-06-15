@@ -53,7 +53,7 @@ while True:
             print(emotion_prediction)
             print(emotion_probability)
             print(emotion_text)
-            cv2.putText(frame, emotion_text, (300,450), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2)
+            cv2.putText(frame, emotion_text, (x1 ,y1 - 20), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2)
     #display resulting fram
     cv2.imshow('frame',frame)
     if cv2.waitKey(1) &0xFF == ord('q'):
